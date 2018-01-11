@@ -14,8 +14,7 @@ public class RotateMatrix {
 			for (int j = 0; j < cols; j++) {
 				matrix[i][j] = scan.nextInt();
 			}
-		}
-		cloneTopLeft();		
+		}	
 	}
 	
 	public void printMatrix() {
@@ -32,16 +31,25 @@ public class RotateMatrix {
 	public int[][] cloneTopLeft(){
 		int halfBound = rows/2;
 		int[][] tempq1 = new int[halfBound][halfBound];
-		for(int i = 0; i < halfBound; i++) {
-			for(int j = 0; j < halfBound; j++)
-				tempq1[i][j] = matrix[i][j];
+		if(rows%2 != 0) {
+			for(int i = 0; i < halfBound; i++) {
+				for(int j = 0; j < halfBound; j++)
+					tempq1[i][j] = matrix[i][j];
+			}			
 		}
+
 		return tempq1;
 	}
 	
 	public void rotateClockwise() {
 		//clone q1 so it isn't lost in the process
 		int[][] q1 = cloneTopLeft();	
+		int[] middleSection = new int[rows];
+		if(rows%2 != 0) {
+			for(int i = 0; i < rows; i++) {
+				middleSection[i] = matrix[rows/2][i];
+			}			
+		}
 		
 		//move q4 to q1
 		for(int i = rows/2; i < rows; i++) {
@@ -70,13 +78,28 @@ public class RotateMatrix {
 				matrix[j][rows - 1 - i] = q1[i][j];
 			}
 		}
+		
+		//if the size is an odd number, the middle cross-section 
+		//must be changed manually.
+		if(rows%2 != 0) {
+			for(int i = 0; i < rows; i++) {
+				matrix[i][cols/2] = middleSection[i];
+				System.out.print(middleSection[i] + "|");
+			}
+		}
 		System.out.println("Matrix rotated Clockwise! (:");
 		
 	}
 	
 	public void rotateCounterClockwise() {
 		//clone q1 so it isn't lost in the process
-		int[][] q1 = cloneTopLeft();	
+		int[][] q1 = cloneTopLeft();
+		int[] middleSection = new int[rows];
+		if(cols%2 != 0) {
+			for(int i = 0; i < rows; i++) {
+				middleSection[i] = matrix[i][cols/2];
+			}
+		}
 		
 		//move q2 to q1
 		for(int i = 0; i < rows/2; i++) {
@@ -103,6 +126,13 @@ public class RotateMatrix {
 		for(int i = 0; i < rows/2; i++) {
 			for(int j = 0; j < cols/2; j++) {
 				matrix[cols - 1 - j][i] = q1[i][j];
+			}
+		}
+		
+		if(rows%2 != 0) {
+			for(int i = 0; i < rows; i++) {
+				matrix[rows/2][i] = middleSection[i];
+				System.out.print(middleSection[i] + "|");
 			}
 		}
 		System.out.println("Matrix rotated Counter-Clockwise! (:");
