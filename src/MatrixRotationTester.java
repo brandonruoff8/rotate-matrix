@@ -10,7 +10,7 @@ public class MatrixRotationTester {
 			RotateMatrix rotateMatrix = new RotateMatrix();
 			rotateMatrix.readInMatrix(scan);
 			rotateMatrix.printMatrix();
-			//rotateMatrix.rotateClockwise();
+			rotateMatrix.rotateClockwise();
 			rotateMatrix.rotateCounterClockwise();
 			rotateMatrix.printMatrix();
 		}

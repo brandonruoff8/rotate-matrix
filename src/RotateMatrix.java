@@ -31,13 +31,10 @@ public class RotateMatrix {
 	public int[][] cloneTopLeft(){
 		int halfBound = rows/2;
 		int[][] tempq1 = new int[halfBound][halfBound];
-		if(rows%2 != 0) {
-			for(int i = 0; i < halfBound; i++) {
-				for(int j = 0; j < halfBound; j++)
-					tempq1[i][j] = matrix[i][j];
-			}			
-		}
-
+		for(int i = 0; i < halfBound; i++) {
+			for(int j = 0; j < halfBound; j++)
+				tempq1[i][j] = matrix[i][j];
+		}			
 		return tempq1;
 	}
 	
@@ -84,7 +81,6 @@ public class RotateMatrix {
 		if(rows%2 != 0) {
 			for(int i = 0; i < rows; i++) {
 				matrix[i][cols/2] = middleSection[i];
-				System.out.print(middleSection[i] + "|");
 			}
 		}
 		System.out.println("Matrix rotated Clockwise! (:");
@@ -132,7 +128,6 @@ public class RotateMatrix {
 		if(rows%2 != 0) {
 			for(int i = 0; i < rows; i++) {
 				matrix[rows/2][i] = middleSection[i];
-				System.out.print(middleSection[i] + "|");
 			}
 		}
 		System.out.println("Matrix rotated Counter-Clockwise! (:");
